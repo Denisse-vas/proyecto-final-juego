@@ -27,8 +27,20 @@ def enter_move(board):
 			print("¡Cuadro ocupado, ingresa nuevamente!")
 			continue
 	board[row][col] = 'O' 	# colocar 'O' al cuadro seleccionado
+	
+# Lógica ver campos vacios
+def make_list_of_free_fields(board):
+	free = []	# la lista esta vacía inicialmente
+	for row in range(3): # itera a través de las filas
+		for col in range(3): # itera a través de las columnas
+			if board[row][col] not in ['O','X']: # ¿Está la celda libre?
+				free.append((row,col)) # si, agrega una nueva tupla a la lista
+	return free
 		
 
 board = [ [3 * j + i + 1 for i in range(3)] for j in range(3) ] # crear un tablero vacío
+board[1][1] = 'X' # colocar la primer 'X' en el centro
+free = make_list_of_free_fields(board)
+human_turn = True # ¿De quien es turno ahora?
 
 display_board(board)
